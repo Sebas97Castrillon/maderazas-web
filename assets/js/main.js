@@ -2,7 +2,7 @@
   "use strict";
 
   /**
-   * Easy selector helper function
+   * Funcion selector
    */
   const select = (el, all = false) => {
     el = el.trim()
@@ -14,7 +14,7 @@
   }
 
   /**
-   * Easy event listener function
+   * función de escucha de eventos
    */
   const on = (type, el, listener, all = false) => {
     let selectEl = select(el, all)
@@ -28,15 +28,12 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * On scroll escuchador
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
-
-  /**
-   * Navbar links active state on scroll
-   */
+  
   let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
     let position = window.scrollY + 200
@@ -55,7 +52,7 @@
   onscroll(document, navbarlinksActive)
 
   /**
-   * Scrolls to an element with header offset
+   * Se desplaza a un elemento con encabezado desplazado
    */
   const scrollto = (el) => {
     let header = select('#header')
@@ -68,9 +65,6 @@
     })
   }
 
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
-   */
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
@@ -85,7 +79,7 @@
   }
 
   /**
-   * Back to top button
+   * Boton regresar
    */
   let backtotop = select('.back-to-top')
   if (backtotop) {
@@ -101,7 +95,7 @@
   }
 
   /**
-   * Mobile nav toggle
+   * Mobile nav
    */
   on('click', '.mobile-nav-toggle', function(e) {
     select('#navbar').classList.toggle('navbar-mobile')
@@ -110,7 +104,7 @@
   })
 
   /**
-   * Mobile nav dropdowns activate
+   * Mobile nav listas desplegables
    */
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
@@ -119,9 +113,6 @@
     }
   }, true)
 
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
   on('click', '.scrollto', function(e) {
     if (select(this.hash)) {
       e.preventDefault()
@@ -137,9 +128,6 @@
     }
   }, true)
 
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
   window.addEventListener('load', () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -149,7 +137,7 @@
   });
 
   /**
-   * Preloader
+   * Precargador
    */
   let preloader = select('#preloader');
   if (preloader) {
@@ -159,43 +147,7 @@
   }
 
   /**
-   * Clients Slider
-   */
-  new Swiper('.clients-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 2,
-        spaceBetween: 40
-      },
-      480: {
-        slidesPerView: 3,
-        spaceBetween: 60
-      },
-      640: {
-        slidesPerView: 4,
-        spaceBetween: 80
-      },
-      992: {
-        slidesPerView: 6,
-        spaceBetween: 120
-      }
-    }
-  });
-
-  /**
-   * Porfolio isotope and filter
+   * Filter portafolio
    */
   window.addEventListener('load', () => {
     let portfolioContainer = select('.portfolio-container');
@@ -225,14 +177,14 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Iniciar lighbox portafolio
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
   });
 
   /**
-   * Portfolio details slider
+   * Slider portafolio
    */
   new Swiper('.portfolio-details-slider', {
     speed: 400,
@@ -249,25 +201,7 @@
   });
 
   /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Animation on scroll
+   * Animación en desplazamiento
    */
   window.addEventListener('load', () => {
     AOS.init({
@@ -279,7 +213,7 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Iniciar contador 
    */
   new PureCounter();
 
