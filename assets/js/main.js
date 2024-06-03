@@ -1,9 +1,7 @@
-(function() {
+(function () {
   "use strict";
 
-  /**
-   * Funcion selector
-   */
+  // Función para seleccionar elementos del DOM
   const select = (el, all = false) => {
     el = el.trim()
     if (all) {
@@ -13,9 +11,7 @@
     }
   }
 
-  /**
-   * función de escucha de eventos
-   */
+  // Función para agregar un event listener
   const on = (type, el, listener, all = false) => {
     let selectEl = select(el, all)
     if (selectEl) {
@@ -27,13 +23,12 @@
     }
   }
 
-  /**
-   * On scroll escuchador
-   */
+  // Función para agregar un event listener de scroll
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
-  
+
+  // Obtener todos los enlaces de la barra de navegación
   let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
     let position = window.scrollY + 200
@@ -51,9 +46,7 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
-  /**
-   * Se desplaza a un elemento con encabezado desplazado
-   */
+  // Función para desplazarse a un elemento con encabezado desplazado
   const scrollto = (el) => {
     let header = select('#header')
     let offset = header.offsetHeight
@@ -67,6 +60,7 @@
 
   let selectHeader = select('#header')
   if (selectHeader) {
+    // Agregar clases al encabezado al hacer scroll
     const headerScrolled = () => {
       if (window.scrollY > 100) {
         selectHeader.classList.add('header-scrolled')
@@ -78,11 +72,10 @@
     onscroll(document, headerScrolled)
   }
 
-  /**
-   * Boton regresar
-   */
+  // Botón para regresar arriba
   let backtotop = select('.back-to-top')
   if (backtotop) {
+    // Mostrar o ocultar el botón al hacer scroll
     const toggleBacktotop = () => {
       if (window.scrollY > 100) {
         backtotop.classList.add('active')
@@ -94,26 +87,23 @@
     onscroll(document, toggleBacktotop)
   }
 
-  /**
-   * Mobile nav
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
+  // Menú de navegación móvil
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
   })
 
-  /**
-   * Mobile nav listas desplegables
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
+  // Listas desplegables en el menú de navegación móvil
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
     }
   }, true)
 
-  on('click', '.scrollto', function(e) {
+  // Desplazamiento suave al hacer clic en un enlace de la barra de navegación
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -128,6 +118,7 @@
     }
   }, true)
 
+  // Desplazarse a la posición del hash al cargar la página
   window.addEventListener('load', () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -136,9 +127,7 @@
     }
   });
 
-  /**
-   * Precargador
-   */
+  // Eliminar el precargador después de que la página haya cargado completamente
   let preloader = select('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
@@ -146,9 +135,7 @@
     });
   }
 
-  /**
-   * Filter portafolio
-   */
+  // Filtrar elementos del portafolio
   window.addEventListener('load', () => {
     let portfolioContainer = select('.portfolio-container');
     if (portfolioContainer) {
@@ -158,9 +145,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -168,7 +155,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -176,16 +163,12 @@
 
   });
 
-  /**
-   * Iniciar lighbox portafolio
-   */
+  // Inicializar lightbox del portafolio
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
   });
 
-  /**
-   * Slider portafolio
-   */
+  // Inicializar slider del portafolio
   new Swiper('.portfolio-details-slider', {
     speed: 400,
     loop: true,
@@ -200,9 +183,7 @@
     }
   });
 
-  /**
-   * Animación en desplazamiento
-   */
+  // Inicializar animaciones al desplazarse
   window.addEventListener('load', () => {
     AOS.init({
       duration: 1000,
@@ -212,9 +193,7 @@
     });
   });
 
-  /**
-   * Iniciar contador 
-   */
+  // Inicializar contador 
   new PureCounter();
 
 })()
